@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/fullscreenBackgroundColor"
+    android:theme="@style/ThemeOverlay.MicroBoss.FullscreenContainer"
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:context=".VideoStreamActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <VideoView
+        android:id="@+id/stream_player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_tab"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:backgroundTint="@color/black_tab"/>
+    <TextView
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:text=""
+        android:textColor="?attr/fullscreenTextColor"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/drop_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="send"
+                android:background="@color/transparent"
+                android:theme="@style/Theme.Experiment.MicroBoss"
+                android:src="@drawable/send_msg_roll"/>
+            <LinearLayout
+                android:id="@+id/message_container"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:background="@drawable/brown"
+                android:padding="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/name_of_sender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/purple_100mb"
+                    android:textSize="15sp"
+                    android:shadowColor="@color/purple_500"
+                    android:shadowDy="-2"
+                    android:shadowRadius="1"
+                    android:shadowDx="0"/>
+                <TextView
+                    android:id="@+id/email_of_sender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/purple_transparent_50"
+                    android:textSize="12sp"
+                    android:shadowColor="@color/purple_500"
+                    android:shadowDy="-2"
+                    android:shadowRadius="1"
+                    android:shadowDx="0"
+                    android:layout_marginTop="5dp"/>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edit_send_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/black_solid_xx"
+                        android:gravity="top"
+                        android:hint="Enter your message here..."
+                        android:padding="20dp"
+                        android:textColor="@color/purple_100mb"
+                        android:textColorHint="#4D8E8D8D"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/send_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="send"
+                        android:theme="@style/Theme.Experiment.MicroBoss"
+                        android:layout_gravity="center|bottom"
+                        android:gravity="center"/>
+                </FrameLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="@style/Widget.Theme.MicroBoss.ButtonBar.Fullscreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:orientation="horizontal"
+            android:background="@color/black_tab"
+            tools:ignore="UselessParent">
+
+            <LinearLayout
+                android:id="@+id/controls"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/stream_seeker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"/>
+                <TextView
+                    android:id="@+id/stream_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/purple_100"
+                    android:shadowRadius="2"
+                    android:shadowDx="0"
+                    android:shadowDy="1"
+                    android:shadowColor="@color/black"
+                    android:text="00:00"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/toggle_back"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:alpha="0.5"
+                        android:theme="@style/Theme.Experiment.MicroBoss"
+                        android:src="@drawable/ffprev"
+                        />
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/play_stream"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:theme="@style/Theme.Experiment.MicroBoss"
+                        android:src="@drawable/pause"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/toggle_forward"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:alpha="0.5"
+                        android:layout_weight="1"
+                        android:src="@drawable/ffnext"
+                        android:theme="@style/Theme.Experiment.MicroBoss"
+                        android:background="@color/transparent" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "772232219843",
+    "project_id": "microboss-f7b17",
+    "storage_bucket": "microboss-f7b17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772232219843:android:71d28805789fc9a4f96676",
+        "android_client_info": {
+          "package_name": "com.microboss.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772232219843-5kdsh8osk63grp3oqn12voe39e0h83c0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7BTnaPFmUJp12AimXzohpN8p8njP4SSo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772232219843-5kdsh8osk63grp3oqn12voe39e0h83c0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

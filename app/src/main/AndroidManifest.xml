@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.microboss.dev">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MicroBoss">
+        <activity android:name=".SponsorPackages"
+            android:theme="@style/microboss_compat_transparent" />
+        <activity
+            android:name=".FullProfile"
+            android:theme="@style/microboss_compat_transparent" />
+        <activity
+            android:name=".AboutUs"
+            android:theme="@style/microboss_compat_transparent" />
+        <activity
+            android:name=".CautionLoading"
+            android:theme="@style/microboss_compat_transparent" />
+        <activity
+            android:name=".PayActivity"
+            android:theme="@style/microboss_compat_transparent" />
+
+        <meta-data
+            android:name="co.paystack.android.PublicKey"
+            android:value="pk_live_c1221230c63d986b05215c2166e9136fa9c29ad2" />
+
+        <activity
+            android:name=".ConfirmEventReg"
+            android:launchMode="singleInstance"
+            android:theme="@style/microboss_compat_transparent" />
+        <activity
+            android:name=".PrivacyActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/microboss_compat_transparent" />
+        <activity
+            android:name=".VideoStreamActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_video_stream"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/Theme.MicroBoss.Fullscreen" />
+
+        <service
+            android:name=".UpdateService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".MeetBoard"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Apache.MicroBoss.MeetBoard" />
+        <activity
+            android:name=".LoginSignupActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

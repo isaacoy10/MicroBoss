@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/solid"
+    android:layout_marginBottom="90dp"
+    android:layout_marginTop="90dp"
+    tools:context=".PrivacyActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:textColor="#B75A5A5A"
+        android:shadowColor="@color/black"
+        android:shadowRadius="1"
+        android:shadowDy="-1"
+        android:shadowDx="0"
+        android:textSize="17sp"
+        android:text="M I C R O B 0 S S\nTechnologies LTD ®\n\n• • • • • • •"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:theme="@style/Theme.MicroBoss"
+            android:textSize="12sp"
+            android:shadowDy="-1"
+            android:shadowDx="0"
+            android:shadowRadius="2"
+            android:shadowColor="#942D2D2D"
+            android:layout_marginStart="35dp"
+            android:textIsSelectable="true"
+            android:typeface="monospace"
+            android:layout_marginEnd="35dp"
+            android:text="@string/terms_policy"/>
+    </ScrollView>
+
+</LinearLayout>
