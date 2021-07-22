@@ -53,6 +53,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static com.microboss.dev.LoginSignupActivity.address_edit;
@@ -662,6 +664,7 @@ public class UpdateService extends Service {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
                 long total = ds.child("users").child("admin").child(SECTION_UPCOMING).getChildrenCount();
+
                 for(long i = 1; i<=total; i++){
 
                     String sessionTitle = ds.child("users").child("admin").child(SECTION_UPCOMING).child(String.valueOf(i)).child(STREAM_TITLE).getValue().toString();
@@ -710,7 +713,9 @@ public class UpdateService extends Service {
 
             }
         });
-        return upcomingListFromDB;
+    Collections.reverse(upcomingListFromDB);
+        return 
+        upcomingListFromDB;
     }
 
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
