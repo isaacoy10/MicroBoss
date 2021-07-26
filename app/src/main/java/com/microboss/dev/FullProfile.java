@@ -258,36 +258,39 @@ public class FullProfile extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 saveChangesBtn.setVisibility(View.VISIBLE);
 
-                if(view.getId() == R.id.new_title){
-                    tit = s.toString();
+                if(!s.toString().equals("") || !s.toString().isEmpty()) {
 
-                }else if(view.getId() == R.id.new_surname){
-                    sur = s.toString();
+                    if (view.getId() == R.id.new_title) {
+                        tit = s.toString();
 
-                }else if(view.getId() == R.id.new_firstname){
-                    fir = s.toString();
+                    } else if (view.getId() == R.id.new_surname) {
+                        sur = s.toString();
 
-                }else if(view.getId() == R.id.new_mobile){
-                    mob = s.toString();
+                    } else if (view.getId() == R.id.new_firstname) {
+                        fir = s.toString();
 
-                }else if(view.getId() == R.id.new_sex){
-                    sex = s.toString();
+                    } else if (view.getId() == R.id.new_mobile) {
+                        mob = s.toString();
 
-                }else if(view.getId() == R.id.new_organisation){
-                    com = s.toString();
+                    } else if (view.getId() == R.id.new_sex) {
+                        sex = s.toString();
 
-                }else if(view.getId() == R.id.new_role){
-                    rol = s.toString();
+                    } else if (view.getId() == R.id.new_organisation) {
+                        com = s.toString();
 
-                }else if(view.getId() == R.id.new_address){
-                    add = s.toString();
+                    } else if (view.getId() == R.id.new_role) {
+                        rol = s.toString();
 
-                }else if(view.getId() == R.id.new_city){
-                    cit = s.toString();
+                    } else if (view.getId() == R.id.new_address) {
+                        add = s.toString();
 
-                }else if(view.getId() == R.id.new_country){
-                    cou = s.toString();
+                    } else if (view.getId() == R.id.new_city) {
+                        cit = s.toString();
 
+                    } else if (view.getId() == R.id.new_country) {
+                        cou = s.toString();
+
+                    }
                 }
 
             }

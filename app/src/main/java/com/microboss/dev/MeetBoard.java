@@ -3,6 +3,7 @@ package com.microboss.dev;
 import android.Manifest;
 import android.animation.Animator;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -22,6 +23,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -53,6 +55,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
 
+import us.zoom.sdk.ZoomSDK;
+
 import static com.microboss.dev.CautionLoading.actionButton;
 import static com.microboss.dev.CautionLoading.processingText;
 import static com.microboss.dev.UpdateService.DONATION;
@@ -76,14 +80,15 @@ import static com.microboss.dev.UpdateService.uploadType;
 public class MeetBoard extends AppCompatActivity {
 
     FrameLayout bioDataLay, topHUD, sessionsContainer;
-    public static FrameLayout topLay, sponsorLay;
-    LinearLayout mainLay,archLay, liveLay, donate_btn, upcominLay, storeLay, sponsorStoreLay, profileLogoLay;
+    public static FrameLayout topLay, sponsorLay, agentsLay;
+    LinearLayout mainLay,archLay, liveLay, donate_btn, upcominLay, storeLay, sponsorStoreLay, profileLogoLay, closeLower;
+    public static GridLayout itemGrid;
     public static LinearLayout homeLay;
     ImageView optionsIMG, dropPop;
     public static ImageView uhHo;
-    public static TextView fetchedName, fetchedMail, sponsorTxt,
-            archTxt, liveTxt, upcTxt, logoutTxt, profileTxt;
-    public static ListView archListV, liveListV, upcListV;
+    public static TextView fetchedName, fetchedMail, sponsorTxt, agentTxt,
+            archTxt, liveTxt, upcTxt, logoutTxt, profileTxt, lowerTitle;
+    public static ListView archListV, upcListV;
     boolean optionsOpened = false;
     public static SessionAdapter archiveAdapter, liveAdapter, upcomingAdapter;
     Session aSession;
@@ -105,8 +110,7 @@ public class MeetBoard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meet_board);
 
-
-
+        initializeZoomSDK(this);
 
         Typeface head = Typeface.createFromAsset(getAssets(), "fonts/quickbold.ttf");
         Typeface body = Typeface.createFromAsset(getAssets(), "fonts/quickregular.ttf");
@@ -141,6 +145,7 @@ public class MeetBoard extends AppCompatActivity {
         fetchedName = findViewById(R.id.fetched_fullname);
         fetchedMail = findViewById(R.id.fetched_email);
         sponsorTxt = findViewById(R.id.sponsor_txt);
+        agentTxt = findViewById(R.id.agent_incentives_txt);
         profileTxt = findViewById(R.id.profile_logo_txt);
         optionsIMG = findViewById(R.id.options);
         dropPop = findViewById(R.id.drop_pop_details);
@@ -149,10 +154,15 @@ public class MeetBoard extends AppCompatActivity {
 
 
         archLay = findViewById(R.id.archived_lay);
+        itemGrid = findViewById(R.id.item_grids);
+        closeLower = findViewById(R.id.close_lower);
+        lowerTitle = findViewById(R.id.incentives_lower_title);
+
         liveLay = findViewById(R.id.live_lay);
         donate_btn = findViewById(R.id.donate_btn);
         upcominLay = findViewById(R.id.upcoming_lay);
         sponsorLay = findViewById(R.id.sponsor_lay);
+        agentsLay = findViewById(R.id.agent_lay);
         storeLay = findViewById(R.id.store_lay);
         topHUD = findViewById(R.id.hud);
         sessionsContainer = findViewById(R.id.upper_sessions_container);
@@ -166,8 +176,15 @@ public class MeetBoard extends AppCompatActivity {
 
 
         archListV = findViewById(R.id.archived_list);
-        liveListV = findViewById(R.id.live_list);
         upcListV = findViewById(R.id.upcoming_list);
+
+        sessionsContainer.setVisibility(View.VISIBLE);
+        sponsorStoreLay.setVisibility(View.VISIBLE);
+        closeLower.setVisibility(View.GONE);
+        agentsLay.setVisibility(View.VISIBLE);
+        storeLay.setVisibility(View.VISIBLE);
+        itemGrid.setVisibility(View.GONE);
+        lowerTitle.setVisibility(View.GONE);
 
 
         archTxt.setTypeface(thick);
@@ -186,7 +203,7 @@ public class MeetBoard extends AppCompatActivity {
         archiveAdapter = new SessionAdapter(getApplicationContext(),getArchiveInformation());
         archListV.setAdapter(archiveAdapter);
         liveAdapter = new SessionAdapter(getApplicationContext(),getLiveInformation());
-        liveListV.setAdapter(liveAdapter);
+
         upcomingAdapter = new SessionAdapter(getApplicationContext(),getUpcomingInformation());
         upcListV.setAdapter(upcomingAdapter);
 
@@ -245,6 +262,20 @@ public class MeetBoard extends AppCompatActivity {
 //        });
 //        /***/
 
+        closeLower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                sessionsContainer.setVisibility(View.VISIBLE);
+                sponsorStoreLay.setVisibility(View.VISIBLE);
+                agentsLay.setVisibility(View.VISIBLE);
+                itemGrid.setVisibility(View.GONE);
+                lowerTitle.setVisibility(View.GONE);
+
+                closeLower.setVisibility(View.GONE);
+
+            }
+        });
         if(alcType.equals("CORPORATE")){
             sponsorLay.setVisibility(View.VISIBLE);
             profileTxt.setVisibility(View.VISIBLE);
@@ -264,6 +295,23 @@ public class MeetBoard extends AppCompatActivity {
                     );
                     overridePendingTransition(0,0);
 //                lowPop(v.getId());
+                }
+            });
+        }else if(alcType.equals("AGENT")){
+            agentsLay.setVisibility(View.VISIBLE);
+
+            agentsLay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                        sessionsContainer.setVisibility(View.GONE);
+                        sponsorStoreLay.setVisibility(View.GONE);
+                        agentsLay.setVisibility(View.GONE);
+                        closeLower.setVisibility(View.VISIBLE);
+                    itemGrid.setVisibility(View.VISIBLE);
+                    lowerTitle.setVisibility(View.VISIBLE);
+
+
                 }
             });
         }else if(alcType.equals("INDIVIDUAL")){
@@ -429,6 +477,7 @@ public class MeetBoard extends AppCompatActivity {
         mainLay.setAlpha(0);
         bioDataLay.setTranslationY(-1000);
         sponsorTxt.setTypeface(head);
+        agentTxt.setTypeface(head);
 
         mainLay.animate().alpha(1.0f).setDuration(1500).setInterpolator(new AccelerateDecelerateInterpolator()).start();
 
@@ -464,8 +513,17 @@ public class MeetBoard extends AppCompatActivity {
             public void onClick(View v) {
 
 //                lowPop(v.getId());
-                Toast.makeText(MeetBoard.this, "MicroBoss Store is currently under construction...", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MeetBoard.this, "MicroBoss Store is currently under construction...", Toast.LENGTH_SHORT).show();
 //                Snackbar.make(getApplicationContext(),homeLay,"", Snackbar.LENGTH_LONG).show();
+                if(sessionsContainer.getVisibility()==View.VISIBLE){
+                    sessionsContainer.setVisibility(View.GONE);
+
+
+                }else if(sessionsContainer.getVisibility()==View.GONE){
+                    sessionsContainer.setVisibility(View.VISIBLE);
+
+
+                }
 
             }
         });
@@ -517,6 +575,10 @@ public class MeetBoard extends AppCompatActivity {
 
         getUserInformation();
 
+    }
+
+    private void initializeZoomSDK(Context meetBoard) {
+        ZoomSDK sdk = ZoomSDK.getInstance();
     }
 
 //    private void lowPop(int id) {

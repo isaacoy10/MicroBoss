@@ -13,14 +13,29 @@
     <color name="purple_transparent_25">#40D8D8D8</color>
 
 
-    <color name="purple_50">#F4DEB7</color>
-    <color name="purple_transparent_50">#80F4DEB7</color>
-    <color name="purple_100">#C59D57</color>
-    <color name="purple_200">#493E2D</color>
-    <color name="purple_500">#292113</color>
+    <color name="purple_10">#C9D2F4</color>
+    <color name="purple_50">#4F62B3</color>
+    <color name="purple_50x">#AFBEFF</color>
+    <color name="purple_transparent_50">#80646A83</color>
+    <color name="purple_transparent_100">#646A83</color>
+    <color name="purple_100">#7483BF</color>
+    <color name="purple_100_transparent">#6D7483BF</color>
+    <color name="purple_200">#2F354C</color>
+    <color name="purple_200_transparent">#2C2F354C</color>
+    <color name="purple_250_transparent">#A92F354C</color>
+    <color name="purple_500">#14182B</color>
     <color name="purple_700">#000000</color>
-    <color name="teal_200">#6E5831</color>
-    <color name="teal_700">#C59D57</color>
+    <color name="teal_200">#323E70</color>
+    <color name="teal_700">#586DC5</color>
+
+    <color name="backup_purple_50">#F4DEB7</color>
+    <color name="backup_purple_transparent_50">#80F4DEB7</color>
+    <color name="backup_purple_100">#C59D57</color>
+    <color name="backup_purple_200">#493E2D</color>
+    <color name="backup_purple_500">#292113</color>
+    <color name="backup_purple_700">#000000</color>
+    <color name="backup_teal_200">#6E5831</color>
+    <color name="backup_teal_700">#C59D57</color>
 
     <color name="green_matte">#486E31</color>
 

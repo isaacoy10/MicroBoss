@@ -11,5 +11,11 @@
     <gradient android:startColor="#00FFFFFF"
               android:centerColor="#2D878787"
         android:endColor="#00FFFFFF"
-              android:angle="270"/>
+              android:angle="270"
+        android:type="radial"
+        android:useLevel="false"
+        android:gradientRadius="10"
+        android:centerY="0"
+        android:centerX="0"
+        />
 </shape>

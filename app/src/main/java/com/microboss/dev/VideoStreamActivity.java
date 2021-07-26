@@ -157,6 +157,8 @@ public class VideoStreamActivity extends AppCompatActivity {
         String META_VIDEO_LINK = metaIntent.getStringExtra(STREAM_URL);
         String META_IMAGE_LINK = metaIntent.getStringExtra(STREAM_IMAGE_URL);
 
+        binding.videoTitle.setText(META_TITLE);
+        binding.videoInfo.setText(META_INFO);
         binding.streamPlayer.setVideoURI(getVideoUrl(META_VIDEO_LINK));
         binding.dropComment.setOnClickListener(new View.OnClickListener() {
             @Override

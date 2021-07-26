@@ -80,7 +80,6 @@ import static com.microboss.dev.MeetBoard.fetchedMail;
 import static com.microboss.dev.MeetBoard.fetchedName;
 import static com.microboss.dev.MeetBoard.homeLay;
 import static com.microboss.dev.MeetBoard.liveAdapter;
-import static com.microboss.dev.MeetBoard.liveListV;
 import static com.microboss.dev.MeetBoard.profilePicReady;
 import static com.microboss.dev.MeetBoard.topLay;
 import static com.microboss.dev.MeetBoard.uhHo;
@@ -91,6 +90,7 @@ import static com.microboss.dev.VideoStreamActivity.okayPlayNow;
 public class UpdateService extends Service {
     public static User thisUser;
     public static FirebaseAuth mAuth;
+    public static StorageReference sr;
     public static FirebaseUser mUser;
     public static DatabaseReference mDatabase;
     private static FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -111,7 +111,6 @@ public class UpdateService extends Service {
 
     public static Typeface thick;
     public static Typeface thin;
-    public static ArrayList<String> videosTitleArchive;
 
     public static String confirmReg = "", emailMessage = "", eventName = "", password = "", signup_email = "",
             signup_password = "", signup_confirm_password = "", event_confirmation = "", sponsorship_confirmation = "";
@@ -336,6 +335,8 @@ public class UpdateService extends Service {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+        sr = FirebaseStorage.getInstance().getReference();
+
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -343,7 +344,6 @@ public class UpdateService extends Service {
             }
         };
 
-        videosTitleArchive = new ArrayList<>();
 
         try {
             head = Typeface.createFromAsset(getAssets(), "fonts/quickbold.ttf");
@@ -475,7 +475,7 @@ public class UpdateService extends Service {
                         fetchedName.setText(database_firstname
                                 + " " + database_surname);
                         fetchedMail.setText(database_signup_email + "  |  " + database_country);
-                        fetchedMail.setTextColor(UpdateServiceContext.getResources().getColor(R.color.purple_transparent_50));
+                        fetchedMail.setTextColor(UpdateServiceContext.getResources().getColor(R.color.purple_transparent_100));
 
                         StorageReference sr = FirebaseStorage.getInstance().getReference();
                         StorageReference pr = sr.child("images/userpic/"+database_signup_email+"/"+database_signup_email+".jpeg");
@@ -543,6 +543,8 @@ public class UpdateService extends Service {
     public static ArrayList<Session> getArchiveInformation(){
         ArrayList<Session> archiveListFromDB = new ArrayList<>();
 
+
+
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
@@ -555,9 +557,7 @@ public class UpdateService extends Service {
                     String sessionStreamURL  = ds.child("users").child("admin").child(SECTION_ARCHIVE).child(String.valueOf(i)).child(STREAM_URL).getValue().toString();
                     String sessionImageURL  = ds.child("users").child("admin").child(SECTION_ARCHIVE).child(String.valueOf(i)).child(STREAM_IMAGE_URL).getValue().toString();
 
-                    videosTitleArchive.add(STREAM_URL);
 
-                    StorageReference sr = FirebaseStorage.getInstance().getReference();
                     StorageReference pr = sr.child(sessionImageURL);
 
                     final long ONEBYTE = 1024*1024;
@@ -570,6 +570,7 @@ public class UpdateService extends Service {
 
                             archiveAdapter.notifyDataSetChanged();
                         }
+
                     });
 
 
@@ -607,31 +608,31 @@ public class UpdateService extends Service {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
                 long total = ds.child("users").child("admin").child(SECTION_LIVE).getChildrenCount();
-                for(long i = 1; i<=total; i++){
-
-                    String sessionTitle = ds.child("users").child("admin").child(SECTION_LIVE).child(String.valueOf(i)).child(STREAM_TITLE).getValue().toString();
-                    String sessionInfo  = ds.child("users").child("admin").child(SECTION_LIVE).child(String.valueOf(i)).child(STREAM_INFO).getValue().toString();
-                    String sessionDate = ds.child("users").child("admin").child(SECTION_LIVE).child(String.valueOf(i)).child(STREAM_DATE).getValue().toString();
-                    String sessionStreamURL  = ds.child("users").child("admin").child(SECTION_LIVE).child(String.valueOf(i)).child(STREAM_URL).getValue().toString();
-                    String sessionImageURL  = ds.child("users").child("admin").child(SECTION_LIVE).child(String.valueOf(i)).child(STREAM_IMAGE_URL).getValue().toString();
-
-
-                    StorageReference sr = FirebaseStorage.getInstance().getReference();
-                    StorageReference pr = sr.child(sessionImageURL);
-
-                    final long ONEBYTE = 1024*1024;
-                    pr.getBytes(ONEBYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                        @Override
-                        public void onSuccess(byte[] bytes) {
-
-                            Session session = new Session(sessionTitle,sessionInfo,sessionDate,sessionStreamURL, bytes);
-                            liveListFromDB.add(session);
-
-                            liveAdapter.notifyDataSetChanged();
-                        }
-                    });
-
-                }
+//                for(long i = 1; i<=total; i++){
+//
+//                    String sessionTitle = ds.child("users").child("admin").child(SECTION_LIVE).child(String.valueOf(i)).child(STREAM_TITLE).getValue().toString();
+//                    String sessionInfo  = ds.child("users").child("admin").child(SECTION_LIVE).child(String.valueOf(i)).child(STREAM_INFO).getValue().toString();
+//                    String sessionDate = ds.child("users").child("admin").child(SECTION_LIVE).child(String.valueOf(i)).child(STREAM_DATE).getValue().toString();
+//                    String sessionStreamURL  = ds.child("users").child("admin").child(SECTION_LIVE).child(String.valueOf(i)).child(STREAM_URL).getValue().toString();
+//                    String sessionImageURL  = ds.child("users").child("admin").child(SECTION_LIVE).child(String.valueOf(i)).child(STREAM_IMAGE_URL).getValue().toString();
+//
+//
+//                    StorageReference sr = FirebaseStorage.getInstance().getReference();
+//                    StorageReference pr = sr.child(sessionImageURL);
+//
+//                    final long ONEBYTE = 1024*1024;
+//                    pr.getBytes(ONEBYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+//                        @Override
+//                        public void onSuccess(byte[] bytes) {
+//
+//                            Session session = new Session(sessionTitle,sessionInfo,sessionDate,sessionStreamURL, bytes);
+//                            liveListFromDB.add(session);
+//
+//                            liveAdapter.notifyDataSetChanged();
+//                        }
+//                    });
+//
+//                }
                 if(total>0){
                     uhHo.setVisibility(View.GONE);
                 }
@@ -644,19 +645,20 @@ public class UpdateService extends Service {
 
             }
         });
-        liveListV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UpdateServiceContext.startActivity(new Intent(UpdateServiceContext,VideoStreamActivity.class)
-                        .putExtra(STREAM_URL,liveListFromDB.get(position).getStreamURL())
-                        .putExtra(STREAM_TITLE,liveListFromDB.get(position).getTitle())
-                        .putExtra(STREAM_INFO,liveListFromDB.get(position).getInfo())
-                        .putExtra(STREAM_IMAGE_URL,liveListFromDB.get(position).getTArt().toString())
-                );
-            }
-        });
+//        liveListV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                UpdateServiceContext.startActivity(new Intent(UpdateServiceContext,VideoStreamActivity.class)
+//                        .putExtra(STREAM_URL,liveListFromDB.get(position).getStreamURL())
+//                        .putExtra(STREAM_TITLE,liveListFromDB.get(position).getTitle())
+//                        .putExtra(STREAM_INFO,liveListFromDB.get(position).getInfo())
+//                        .putExtra(STREAM_IMAGE_URL,liveListFromDB.get(position).getTArt().toString())
+//                );
+//            }
+//        });
         return liveListFromDB;
     }
+
     public static ArrayList<Session> getUpcomingInformation(){
         ArrayList<Session> upcomingListFromDB = new ArrayList<>();
 
@@ -674,7 +676,6 @@ public class UpdateService extends Service {
                     String sessionImageURL  = ds.child("users").child("admin").child(SECTION_UPCOMING).child(String.valueOf(i)).child(STREAM_IMAGE_URL).getValue().toString();
 
 
-                    StorageReference sr = FirebaseStorage.getInstance().getReference();
                     StorageReference pr = sr.child(sessionImageURL);
 
                     final long ONEBYTE = 1024*1024;
@@ -714,7 +715,7 @@ public class UpdateService extends Service {
             }
         });
     Collections.reverse(upcomingListFromDB);
-        return 
+        return
         upcomingListFromDB;
     }
 

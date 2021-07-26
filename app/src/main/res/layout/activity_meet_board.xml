@@ -96,7 +96,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="E- Mail"
-                            android:textColor="@color/purple_transparent_50"
+                            android:theme="@style/Theme.MicroBoss.MeetBoard"
+                            android:textColor="@color/purple_transparent_100"
                             android:textSize="12sp" />
                         <TextView
                             android:id="@+id/logout_txt"
@@ -112,7 +113,7 @@
                             android:paddingEnd="5dp"
                             android:background="@drawable/purple_solid"
                             android:text="LOG OUT"
-                            android:textColor="@color/purple_transparent_50"/>
+                            android:textColor="@color/purple_transparent_100"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -233,6 +234,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
+                android:visibility="visible"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="2.5">
@@ -272,7 +274,7 @@
 
                     <ImageView
                         android:id="@+id/uh_oh"
-                        android:layout_width="150dp"
+                        android:layout_width="200dp"
                         android:layout_height="262dp"
                         android:layout_gravity="top|center"
                         android:src="@drawable/uh_oh"/>
@@ -325,12 +327,66 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/boss_solid"
                     android:layout_margin="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="10">
+                        <LinearLayout
+                            android:id="@+id/close_lower"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center|end"
+                            android:layout_gravity="center|end"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginTop="10dp"
+                            android:paddingTop="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="CLOSE"
+                                android:textColor="@color/purple_150"
+                                android:layout_marginEnd="10dp"/>
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/options_close"/>
+                        </LinearLayout>
+                        <GridLayout
+                            android:id="@+id/item_grids"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="8"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginTop="10dp"
+                            android:numColumns="2"
+                            android:background="@drawable/white_stroke"/>
+                        <TextView
+                            android:id="@+id/incentives_lower_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="incentives"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="#79252525"
+                            android:shadowColor="#DFDFDF"
+                            android:shadowRadius="1.5"
+                            android:shadowDy="2"
+                            android:shadowDx="0"/>
+                    </LinearLayout>
                 </FrameLayout>
                 <LinearLayout
                     android:id="@+id/sponsor_store"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:weightSum="2">
 
 
@@ -362,6 +418,31 @@
                             android:shadowColor="#162712"
                             android:text="DONATE"/>
                     </LinearLayout>
+                    <FrameLayout
+                        android:id="@+id/agent_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/agent_incentives_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="30dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:lines="1"
+                            android:textSize="15sp"
+                            android:textColor="@color/purple_50x"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginStart="30dp"
+                            android:text="INCENTIVES"/>
+                    </FrameLayout>
                     <FrameLayout
                         android:id="@+id/sponsor_lay"
                         android:layout_width="match_parent"
@@ -401,6 +482,7 @@
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:visibility="gone"
                         android:orientation="vertical">
                         <ImageView
                             android:layout_width="50dp"
@@ -417,7 +499,7 @@
                             android:gravity="center"
                             android:layout_marginStart="30dp"
                             android:textSize="10sp"
-                            android:textColor="@color/purple_50"
+                            android:textColor="@color/purple_50x"
                             android:text="Store"/>
                     </LinearLayout>
                 </LinearLayout>
